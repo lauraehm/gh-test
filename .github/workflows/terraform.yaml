@@ -35,7 +35,7 @@ jobs:
           continue-on-error: false
           working-directory: ./terraform
         - name: Terraform apply
-          if: github.event.pull_request.merged
+          if: ${{ github.event_name == 'push'}}
           run: terraform apply -auto-approve -input=false
           continue-on-error: false
           working-directory: ./terraform
