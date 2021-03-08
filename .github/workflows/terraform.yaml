@@ -1,3 +1,5 @@
+name: Run terraform commands
+
 on: [push, pull_request]
       branches: [main]
       paths:
