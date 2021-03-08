@@ -1,0 +1,39 @@
+on:
+    pull_request:
+      branches: [main]
+      paths:
+        - 'terraform/**'
+name: Deploy terraform
+jobs:
+    terraform_apply:
+      runs-on: ubuntu-latest
+      steps:
+        - name: checkout code
+          uses: actions/checkout@v2
+        - name: Configure AWS credential
+          uses: aws-actions/configure-aws-credentials@v1
+          with:
+            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_2 }}
+            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_2 }}
+            aws-region: us-east-1
+        - name: Setup for terraform  
+          uses: hashicorp/setup-terraform@v1
+        - name: Terraform fmt
+          id: fmt
+          run: terraform fmt
+          continue-on-error: false
+          working-directory: ./terraform
+        - name: Terraform init
+          run: terraform init
+          working-directory: ./terraform
+        - name: Terraform validation
+          run: terraform validate
+          working-directory: ./terraform
+        - name: Terraform plan
+          run: terraform plan
+          continue-on-error: false
+          working-directory: ./terraform
+        # - name: Terraform apply
+        #   run: terraform apply -auto-approve -input=false
+        #   continue-on-error: false
+        #   working-directory: ./terraform
