@@ -1,9 +1,7 @@
-name: Run terraform commands
-
 on: [push, pull_request]
-      branches: [main]
-      paths:
-        - 'terraform/**'
+    branches: [main]
+    paths:
+      - 'terraform/**'
 name: Deploy terraform
 jobs:
     terraform_apply:
