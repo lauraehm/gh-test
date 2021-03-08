@@ -10,7 +10,7 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - name: echo envent name
-          run: echo ${{  github.event }}
+          run: printf '%s\n' "${github.event[@]}"
         - name: checkout code
           uses: actions/checkout@v2
         - name: Configure AWS credential
