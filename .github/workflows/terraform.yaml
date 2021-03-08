@@ -1,8 +1,9 @@
 on:
-    pull_request:
-      branches: [main]
-      paths:
-        - 'terraform/**'
+  push:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'terraform/**'
 name: Deploy terraform
 jobs:
     terraform_apply:
