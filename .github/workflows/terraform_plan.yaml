@@ -3,7 +3,7 @@ on:
     branches: [main]
     paths:
       - 'terraform/**'
-name: Deploy terraform
+name: Terraform Plan
 jobs:
     terraform_apply:
       runs-on: ubuntu-latest
@@ -31,10 +31,5 @@ jobs:
           working-directory: ./terraform
         - name: Terraform plan
           run: terraform plan
-          continue-on-error: false
-          working-directory: ./terraform
-        - name: Terraform apply
-          if: github.event.pull_request.merged == true
-          run: terraform apply -auto-approve -input=false
           continue-on-error: false
           working-directory: ./terraform
