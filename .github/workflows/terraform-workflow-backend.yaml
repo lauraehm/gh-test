@@ -1,13 +1,16 @@
 on:
+  push:
+    branches: [main]
+    paths:
+     - 'terraform/backend/**'
   pull_request:
     branches: [main]
     paths:
-      - 'terraform/**'
-name: Terraform Plan
+     - 'terraform/backend/**'
 jobs:
-    terraform_apply:
-      runs-on: ubuntu-latest
-      steps:
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
         - name: checkout code
           uses: actions/checkout@v2
         - name: Configure AWS credential
@@ -22,14 +25,19 @@ jobs:
           id: fmt
           run: terraform fmt
           continue-on-error: false
-          working-directory: ./terraform
+          working-directory: ./terraform/backend
         - name: Terraform init
           run: terraform init
-          working-directory: ./terraform
+          working-directory: ./terraform/backend
         - name: Terraform validation
           run: terraform validate
-          working-directory: ./terraform
+          working-directory: ./terraform/backend
         - name: Terraform plan
           run: terraform plan
           continue-on-error: false
-          working-directory: ./terraform
+          working-directory: ./terraform/backend
+        - name: Terraform apply
+          if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+          run: terraform apply -auto-approve -input=false
+          continue-on-error: false
+          working-directory: ./terraform/backend

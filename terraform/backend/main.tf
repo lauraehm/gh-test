@@ -11,6 +11,10 @@ provider "aws" {
     region            = var.region
 }
 
+resource "aws_s3_bucket" "gh-test" {
+  bucket = "gh-test-1"
+}
+
 resource "aws_s3_bucket" "s3" {
   bucket = "${var.project_name}-${var.environment}-s3-terraform-backend"
 

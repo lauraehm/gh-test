@@ -2,12 +2,15 @@ on:
   push:
     branches: [main]
     paths:
-      - 'terraform/**'
-name: Terraform Apply
+     - 'terraform/main/**'
+  pull_request:
+    branches: [main]
+    paths:
+     - 'terraform/main/**'
 jobs:
-    terraform_apply:
-      runs-on: ubuntu-latest
-      steps:
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
         - name: checkout code
           uses: actions/checkout@v2
         - name: Configure AWS credential
@@ -16,25 +19,25 @@ jobs:
             aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_2 }}
             aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_2 }}
             aws-region: us-east-1
-        - name: Setup for terraform
+        - name: Setup for terraform  
           uses: hashicorp/setup-terraform@v1
         - name: Terraform fmt
           id: fmt
           run: terraform fmt
           continue-on-error: false
-          working-directory: ./terraform
+          working-directory: ./terraform/main
         - name: Terraform init
           run: terraform init
-          working-directory: ./terraform
+          working-directory: ./terraform/main
         - name: Terraform validation
           run: terraform validate
-          working-directory: ./terraform
+          working-directory: ./terraform/main
         - name: Terraform plan
           run: terraform plan
           continue-on-error: false
-          working-directory: ./terraform
+          working-directory: ./terraform/main
         - name: Terraform apply
-          if: github.event.pull_request.merged == true
+          if: github.ref == 'refs/heads/main' && github.event_name == 'push'
           run: terraform apply -auto-approve -input=false
           continue-on-error: false
-          working-directory: ./terraform
+          working-directory: ./terraform/main
