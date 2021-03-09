@@ -12,7 +12,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "gh-test" {
-  bucket = "gh-test-3"
+  bucket = "gh-test-4"
 }
 
 resource "aws_s3_bucket" "s3" {
