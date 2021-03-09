@@ -33,11 +33,11 @@ jobs:
           run: terraform validate
           working-directory: ./terraform/backend
         - name: Terraform plan
-          run: terraform plan -out terarform-backend.out
+          run: terraform plan -out terraform-backend.out
           continue-on-error: false
           working-directory: ./terraform/backend
         - name: Terraform apply
           if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-          run: terraform apply terarform-backend.out -auto-approve -input=false
+          run: terraform apply terraform-backend.out -auto-approve -input=false
           continue-on-error: false
           working-directory: ./terraform/backend
