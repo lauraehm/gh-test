@@ -1,6 +1,10 @@
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'terraform/**'
   pull_request:
-    branches: [main]
     paths:
       - 'terraform/**'
 name: Terraform Plan
@@ -31,5 +35,10 @@ jobs:
           working-directory: ./terraform
         - name: Terraform plan
           run: terraform plan
+          continue-on-error: false
+          working-directory: ./terraform
+        - name: Terraform apply
+          run: terraform apply -auto-approve -input=false
+          if: ${{ github.event.pull_request.merged == 'true'}}
           continue-on-error: false
           working-directory: ./terraform
