@@ -1,5 +1,4 @@
 on:
-  push:
   pull_request:
     branches: [main]
     paths:
@@ -9,8 +8,6 @@ jobs:
     terraform_apply:
       runs-on: ubuntu-latest
       steps:
-        - name: echo envent name
-          run: echo ${{  github.event_name }}
         - name: checkout code
           uses: actions/checkout@v2
         - name: Configure AWS credential
@@ -37,7 +34,7 @@ jobs:
           continue-on-error: false
           working-directory: ./terraform
         - name: Terraform apply
-          if: ${{ github.event_name == 'push'}}
+          if: github.event.pull_request.merged == true
           run: terraform apply -auto-approve -input=false
           continue-on-error: false
           working-directory: ./terraform
