@@ -7,11 +7,10 @@ on:
       branches: [main]
       paths:
        - 'terraform/**'
-  name: Terraform Plan
-  jobs:
-      terraform_plan:
-        runs-on: ubuntu-latest
-        steps:
+jobs:
+    terraform:
+      runs-on: ubuntu-latest
+      steps:
           - name: checkout code
             uses: actions/checkout@v2
           - name: Configure AWS credential
