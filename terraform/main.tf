@@ -12,5 +12,5 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "gh-test" {
-  bucket = "gh-test-2"
+  bucket = "gh-test-3"
 }
