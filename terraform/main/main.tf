@@ -2,10 +2,10 @@ terraform {
   required_version = "~> 0.14.0"
 
   backend "s3" {
-    bucket         = "fraud-detector-poc-development-s3-terraform-backend"
+    bucket         = "s3-terraform-backend-gh-test"
     key            = "fraud-detector-poc-development.tfstate"
     region         = "us-east-1"
-    dynamodb_table = "fraud-detector-poc-development-dynamo-terraform-backend"
+    dynamodb_table = "dynamo-terraform-backend-gh-test"
     encrypt        = true
   }
 
