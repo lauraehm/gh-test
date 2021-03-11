@@ -26,4 +26,15 @@ provider "aws" {
   region  = var.region
 }
 
+##VPC TEST
+resource "aws_vpc" "terraform-vpc" {
+  cidr_block           = "11.0.0.0/16"
+  enable_dns_support   = "true"
+  enable_dns_hostnames = "true"
+  enable_classiclink   = "false"
+  instance_tenancy     = "default"
 
+  tags = {
+    "Name" = "var.project"
+  }
+}
