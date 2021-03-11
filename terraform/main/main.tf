@@ -36,6 +36,5 @@ resource "aws_vpc" "terraform-vpc" {
 
   tags = {
     "Name" = "var.project"
-    "test" = "testing"
   }
 }
