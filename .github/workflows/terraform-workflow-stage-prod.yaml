@@ -41,7 +41,7 @@ jobs:
         working-directory: ./terraform/main
 
       - name: Terraform apply
-        if: github.ref == 'refs/heads/release*' && github.event_name == 'push'
+        if: github.event_name == 'push'
         run: |
           terraform workspace select stage || terraform workspace new stage
           terraform plan -var-file=stage.tfvars -out=plan.out
