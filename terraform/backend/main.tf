@@ -12,11 +12,11 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "gh-test" {
-  bucket = "gh-test-6"
+  bucket = "gh-test-7"
 }
 
 resource "aws_s3_bucket" "s3" {
-  bucket = "${var.project_name}-${var.environment}-s3-terraform-backend"
+  bucket = "s3-terraform-backend"
 
   lifecycle {
     prevent_destroy = true
@@ -36,7 +36,7 @@ resource "aws_s3_bucket" "s3" {
 }
 
 resource "aws_dynamodb_table" "dynamo" {
-  name         = "${var.project_name}-${var.environment}-dynamo-terraform-backend"
+  name         = "dynamo-terraform-backend"
   billing_mode = "PAY_PER_REQUEST"
   hash_key     = "LockID"
 
