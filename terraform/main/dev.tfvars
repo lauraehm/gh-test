@@ -1,3 +1,5 @@
 environment = "development"
 
-project =  "karen-test"
+variable "project" {
+  default = "karen-test"
+}

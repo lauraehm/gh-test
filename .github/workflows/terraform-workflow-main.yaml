@@ -35,7 +35,7 @@ jobs:
         working-directory: ./terraform/main
 
       - name: Terraform validation
-        run: terraform validate -var-file="terraform.tfvars"
+        run: terraform validate
         working-directory: ./terraform/main
 
       - name: Terraform apply
