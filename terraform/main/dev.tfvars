@@ -1,5 +1,5 @@
-project_name = "fraud-detector-poc"
-
 environment = "development"
 
-region = "us-east-1"
+variable "project" {
+  default = "karen-test"
+}
