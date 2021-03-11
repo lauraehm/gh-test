@@ -11,12 +11,8 @@ provider "aws" {
     region            = var.region
 }
 
-resource "aws_s3_bucket" "gh-test" {
-  bucket = "gh-test-8"
-}
-
 resource "aws_s3_bucket" "s3-test" {
-  bucket = "s3-terraform-backend"
+  bucket = "s3-terraform-backend-gh-test"
 
   lifecycle {
     prevent_destroy = true
@@ -36,7 +32,7 @@ resource "aws_s3_bucket" "s3-test" {
 }
 
 resource "aws_dynamodb_table" "dynamo-test" {
-  name         = "dynamo-terraform-backend"
+  name         = "dynamo-terraform-backend-gh-test"
   billing_mode = "PAY_PER_REQUEST"
   hash_key     = "LockID"
 
