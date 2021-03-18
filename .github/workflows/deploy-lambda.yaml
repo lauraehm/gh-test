@@ -12,10 +12,10 @@ jobs:
       - name: checkout source code
         uses: actions/checkout@v1
       - name: AWS Lambda Deploy
-        uses: appleboy/lambda-action@v0.1.2
+        uses: appleboy/lambda-action@master
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_2 }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_2 }}
           aws_region: us-east-1
           function_name: test
-          source: example/index.js
+          source: lambda-test/lambda_function.py
