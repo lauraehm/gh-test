@@ -18,4 +18,4 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_2 }}
           aws_region: us-east-1
           function_name: test
-          zip_file: lambda-test/lambda_function.zip
+          source: lambda/lambda_function.py
