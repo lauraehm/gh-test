@@ -12,21 +12,22 @@ resource "aws_s3_bucket" "s3_lambda_bucket" {
 }
 
 resource "aws_s3_bucket_object" "object" {
-  bucket = "s3_lambda_bucket"
+  bucket = "s3lambdabucket"
   key    = "lambda-test.zip"
-  source = "/lambda-test/lambda-test.zip"
+  source = "../lambda-test/lambda-test.zip"
 }
 
 resource "aws_lambda_function" "lambda_test" {
    function_name = "lambda_test"
 
-   s3_bucket = "s3_lambda_bucket"
+   s3_bucket = "s3lambdabucket"
    s3_key    = "lambda-test.zip"
 
    handler = "lambda_function.lambda_handler"
    runtime = "python3.8"
 
    role = aws_iam_role.lambda_exec.arn
+   depends_on = [ aws_s3_bucket.s3_lambda_bucket ]
 }
 
 resource "aws_iam_role" "lambda_exec" {
