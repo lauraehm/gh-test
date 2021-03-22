@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "s3_lambda_bucket" {
-  bucket = "s3lambdabucket"
+  bucket = "LambdaS3Bucket"
   acl    = "private"
   
   versioning {
@@ -12,15 +12,15 @@ resource "aws_s3_bucket" "s3_lambda_bucket" {
 }
 
 resource "aws_s3_bucket_object" "object" {
-  bucket = "s3lambdabucket"
+  bucket = "LambdaS3Bucket"
   key    = "lambda-test.zip"
-  source = "lambda-test/lambda_function.zip"
+  source = "../lambda-test/lambda_function.zip"
 }
 
 resource "aws_lambda_function" "lambda_test" {
    function_name = "lambda_test"
 
-   s3_bucket = "s3lambdabucket"
+   s3_bucket = "LambdaS3Bucket"
    s3_key    = "lambda-test.zip"
 
    handler = "lambda_function.lambda_handler"
