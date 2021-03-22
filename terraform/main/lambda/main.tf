@@ -15,6 +15,7 @@ resource "aws_s3_bucket_object" "object" {
   bucket = "LambdaS3Bucket-march22"
   key    = "lambda-test.zip"
   source = file("../../lambda-test/lambda_function.zip")
+}
 
 resource "aws_lambda_function" "lambda_test" {
    function_name = "lambda_test"
