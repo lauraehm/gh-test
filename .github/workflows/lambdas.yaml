@@ -1,0 +1,21 @@
+on:
+    push:
+      branches: [main]
+      paths:
+       - 'lambda-test/**'
+  jobs:
+    terraform:
+      runs-on: ubuntu-latest
+      steps:
+          - name: checkout code
+            uses: actions/checkout@v2
+          - name: Configure AWS credential
+            uses: aws-actions/configure-aws-credentials@v1
+            with:
+              aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_2 }}
+              aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_2 }}
+              aws-region: us-east-1
+          - name: Create ZIP
+            run: zip lambda_function.zip lambda-test/lambda_function.py
+          - name: Upload to Lambda S3 Bucket
+            run: aws s3 cp lambda_function.zip s3://s3_lambda_bucket/lambda_function.zip
