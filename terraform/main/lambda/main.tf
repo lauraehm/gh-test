@@ -14,7 +14,7 @@ resource "aws_s3_bucket" "s3_lambda_bucket" {
 resource "aws_s3_bucket_object" "object" {
   bucket = "s3_lambda_bucket"
   key    = "lambda-test.zip"
-  source = "lambda-test/lambda-test.zip"
+  source = "/lambda-test/lambda-test.zip"
 }
 
 resource "aws_lambda_function" "lambda_test" {
@@ -34,7 +34,7 @@ resource "aws_iam_role" "lambda_exec" {
 
    assume_role_policy = <<EOF
 {
-  "Version": "2020-03-22",
+  "Version": "2012-10-17",
   "Statement": [
     {
       "Action": "sts:AssumeRole",
