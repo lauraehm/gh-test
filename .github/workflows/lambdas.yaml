@@ -1,8 +1,8 @@
 on:
     push:
-      branches: [main]
-      paths:
-       - 'lambda-test/**'
+        branches: [main]
+        paths:
+         - 'lambda-test/**'
   jobs:
     terraform:
       runs-on: ubuntu-latest
