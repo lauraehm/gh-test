@@ -17,5 +17,5 @@ jobs:
               aws-region: us-east-1
           - name: Create ZIP
             run: zip lambda_function.zip lambda-test/lambda_function.py
-          - name: Upload to Lambda S3 Bucket
+          - name: Upload to Lambda S3 Bucket :)
             run: aws s3 cp lambda_function.zip s3://march22laumbucket/lambda_function.zip
