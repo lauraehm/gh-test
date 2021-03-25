@@ -45,9 +45,9 @@ resource "aws_lambda_function" "lambda_test" {
   #  s3_bucket = "march22laumbucket"
   #  s3_key    = "lambda-test.zip"
 
-   file    = "../../lambda-test/dummy.zip"
-   handler = "lambda_function.lambda_handler"
-   runtime = "python3.8"
+   filename = "../../lambda-test/dummy.zip"
+   handler  = "lambda_function.lambda_handler"
+   runtime  = "python3.8"
 
    role = aws_iam_role.lambda_exec.arn
   #  depends_on = [ aws_s3_bucket_object.object ]

@@ -27,7 +27,7 @@ provider "aws" {
 }
 
 data "template_file" "template_lambda"{
-  template = file("deploy-lambda.yaml")
+  template = "deploy-lambda.yaml"
 
   vars = {
     lambda_name = var.lambda_name
@@ -35,7 +35,7 @@ data "template_file" "template_lambda"{
 }
 
 resource "local_file" "gh_lambda" {
-  content = var.template_file.template_lambda.rendered
+  content = template_file.template_lambda.rendered
   filename = ".github/workflows/lambda.yaml"
 }
 
