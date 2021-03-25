@@ -3,10 +3,14 @@ on:
     branches: [main]
     paths:
       - "terraform/main/**"
+    paths-ignore:
+      - 'lambda-test/**'
   pull_request:
     branches: [main]
     paths:
       - "terraform/main/**"
+    paths-ignore:
+        - 'lambda-test/**'
 jobs:
   terraform:
     runs-on: ubuntu-latest
