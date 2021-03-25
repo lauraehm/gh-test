@@ -1,0 +1,3 @@
+#!/usr/bin/env bash 
+
+echo "El nombre de la lambda es: ${lambda_name}"

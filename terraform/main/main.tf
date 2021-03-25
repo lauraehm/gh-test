@@ -27,7 +27,7 @@ provider "aws" {
 }
 
 data "template_file" "template_lambda"{
-  template = "deploy-lambda.yaml"
+  template = "test-bash.sh"
 
   vars     = {
     lambda_name = var.lambda_name
@@ -36,7 +36,7 @@ data "template_file" "template_lambda"{
 
 resource "local_file" "gh_lambda" {
   content    = data.template_file.template_lambda.rendered
-  filename   = "../.github/workflows/lambda.yaml"
+  filename   = "../.github/workflows/"
 }
 
 module "lambda" {
