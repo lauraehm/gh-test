@@ -10,7 +10,7 @@ on:
     paths:
       - "terraform/main/**"
     paths-ignore:
-        - 'lambda-test/**'
+      - 'lambda-test/**'
 jobs:
   terraform:
     runs-on: ubuntu-latest
