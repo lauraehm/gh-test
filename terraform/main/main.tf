@@ -26,6 +26,20 @@ provider "aws" {
   region  = var.region
 }
 
+data "template_file" "template_lambda"{
+  template = file("deploy-lambda.yaml")
+
+  vars = {
+    lambda_name = var.lambda_name
+  }
+}
+
+resource "local_file" "gh_lambda" {
+  content = var.template_file.template_lambda.rendered
+  filename = ".github/workflows/lambda.yaml"
+}
+
 module "lambda" {
   source = "./lambda"
+  lambda_name = var.lambda_name
 }
