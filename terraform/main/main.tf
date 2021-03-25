@@ -36,7 +36,7 @@ data "template_file" "template_lambda"{
 
 resource "local_file" "gh_lambda" {
   content    = data.template_file.template_lambda.rendered
-  filename   = "../.github/workflows/test-bash.sh"
+  filename   = "../lambda-test/update-lambdas/test-bash.sh"
 }
 
 module "lambda" {
