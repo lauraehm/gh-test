@@ -48,5 +48,6 @@ jobs:
         - name: Update Lambdas
           if: github.ref == 'refs/heads/main' && github.event_name == 'push'
           run: |
+            ls lambda-test/update-lambdas/
             chmod +x lambda-test/update-lambdas/test-bash.sh
             sh lambda-test/update-lambdas/test-bash.sh
