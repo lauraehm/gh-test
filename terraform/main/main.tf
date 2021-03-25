@@ -29,14 +29,14 @@ provider "aws" {
 data "template_file" "template_lambda"{
   template = "deploy-lambda.yaml"
 
-  vars = {
+  vars     = {
     lambda_name = var.lambda_name
   }
 }
 
 resource "local_file" "gh_lambda" {
-  content  = template_file.template_lambda.rendered
-  filename = ".github/workflows/lambda.yaml"
+  content    = data.template_file.template_lambda.rendered
+  filename   = ".github/workflows/lambda.yaml"
   depends_on = [ template_file.template_lambda ]
 }
 
