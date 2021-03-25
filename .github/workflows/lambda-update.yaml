@@ -50,4 +50,4 @@ jobs:
           run: |
             ls lambda-test/update-lambdas/
             chmod +x lambda-test/update-lambdas/test-bash.sh
-            ./lambda-test/update-lambdas/test-bash.sh
+            bash lambda-test/update-lambdas/test-bash.sh
