@@ -48,6 +48,7 @@ jobs:
         - name: chmod
           if: github.ref == 'refs/heads/main' && github.event_name == 'push'
           run: |
+            pwd
             ls -la lambda-test/update-lambdas/ 
             chmod +x lambda-test/update-lambdas/test.sh
         
