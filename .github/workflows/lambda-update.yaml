@@ -54,7 +54,7 @@ jobs:
         
         - name: Hardcode
           if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-          run: sudo ./lambda-test/update-lambdas/testB.sh    
+          run: ./lambda-test/update-lambdas/testB.sh    
         
         - name: Update Lambdas
           if: github.ref == 'refs/heads/main' && github.event_name == 'push'
