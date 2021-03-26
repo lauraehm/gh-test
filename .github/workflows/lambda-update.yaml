@@ -58,11 +58,10 @@ jobs:
           echo "dynamic file" >> lambda-test/update-lambdas/test.txt
           cat lambda-test/update-lambdas/test.txt
 
-
         - name: run new dynamic file
           if: github.ref == 'refs/heads/main' && github.event_name == 'push'
           run: ./lambda-test/update-lambdas/testC.sh
-        
+
         - name: Update Lambdas
           if: github.ref == 'refs/heads/main' && github.event_name == 'push'
           run: bash ./lambda-test/update-lambdas/test.sh
