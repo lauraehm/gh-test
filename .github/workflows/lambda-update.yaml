@@ -54,9 +54,11 @@ jobs:
 
         - name: add new file
           if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-          run: |
-          echo "dynamic file" >> lambda-test/update-lambdas/test.txt
-          cat lambda-test/update-lambdas/test.txt
+          run: echo "dynamic file" >> lambda-test/update-lambdas/test.txt
+        
+        - name: check file
+          if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+          run: cat lambda-test/update-lambdas/test.txt
 
         - name: run new dynamic file
           if: github.ref == 'refs/heads/main' && github.event_name == 'push'
