@@ -52,13 +52,16 @@ jobs:
             ls -la lambda-test/update-lambdas/
             which bash
 
-        - name: add a line to the harcoded file
+        - name: add new file
           if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-          run: echo "ls" >> lambda-test/update-lambdas/testB.sh
+          run: |
+          echo "dynamic file" >> lambda-test/update-lambdas/test.txt
+          cat lambda-test/update-lambdas/test.txt
 
-        - name: Hardcode
+
+        - name: run new dynamic file
           if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-          run: ./lambda-test/update-lambdas/testB.sh
+          run: ./lambda-test/update-lambdas/testC.sh
         
         - name: Update Lambdas
           if: github.ref == 'refs/heads/main' && github.event_name == 'push'
