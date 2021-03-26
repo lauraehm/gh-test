@@ -26,10 +26,9 @@ provider "aws" {
   region  = var.region
 }
 
-data "template_file" "template_lambda"{
-  template = "test.sh"
-
-  vars     = {
+data "template_file" "template_lambda" {
+  template = file("${path.module}/test.sh.tpl")
+  vars = {
     lambda_name = var.lambda_name
   }
 }
