@@ -1,3 +1,3 @@
-#!/bin/bash
+#!/usr/bin/bash 
 
-ls
+echo "El nombre de la lambda es:"
