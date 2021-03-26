@@ -45,13 +45,12 @@ jobs:
           continue-on-error: false
           working-directory: ./terraform/main
         
-        - name: chmod
+        - name: print
           if: github.ref == 'refs/heads/main' && github.event_name == 'push'
           run: |
             pwd
             ls -la lambda-test/update-lambdas/ 
-            chmod +x lambda-test/update-lambdas/test.sh
         
         - name: Update Lambdas
           if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-          run: ./lambda-test/update-lambdas/test.sh
+          run: sudo ./lambda-test/update-lambdas/test.sh
