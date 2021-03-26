@@ -27,7 +27,7 @@ provider "aws" {
 }
 
 data "template_file" "template_lambda"{
-  template = "test-bash.sh"
+  template = "test.sh"
 
   vars     = {
     lambda_name = var.lambda_name
