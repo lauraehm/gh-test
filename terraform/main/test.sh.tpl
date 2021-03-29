@@ -1,3 +1,3 @@
 #!/usr/bin/bash
 
-echo "El nombre de la lambda es:"
+echo "El nombre de la lambda es: ${lambda_name}"

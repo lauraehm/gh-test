@@ -44,26 +44,7 @@ jobs:
             terraform apply "plan.out"
           continue-on-error: false
           working-directory: ./terraform/main
-        
-        - name: print
-          if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-          run: |
-            pwd
-            ls -la lambda-test/update-lambdas/
-            which bash
-
-        - name: add new file
-          if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-          run: echo "dynamic file" >> lambda-test/update-lambdas/test.txt
-        
-        - name: check file
-          if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-          run: cat lambda-test/update-lambdas/test.txt
-
-        - name: run new dynamic file
-          if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-          run: ./lambda-test/update-lambdas/testB.sh
-
+ 
         - name: Update Lambdas
           if: github.ref == 'refs/heads/main' && github.event_name == 'push'
           run: bash ./lambda-test/update-lambdas/test.sh
