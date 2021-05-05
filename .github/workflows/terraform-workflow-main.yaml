@@ -48,6 +48,6 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
           terraform workspace select dev
-          terraform destroy
+          terraform destroy -auto-approve -input=false
         continue-on-error: false
         working-directory: ./terraform/main
