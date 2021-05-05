@@ -1,16 +1,16 @@
 on:
   push:
     branches: [main]
-    paths:
-      - "terraform/main/**"
-    paths-ignore:
-      - 'lambda-test/**'
+    # paths:
+    #   - "terraform/main/**"
+    # paths-ignore:
+    #   - 'lambda-test/**'
   pull_request:
     branches: [main]
-    paths:
-      - "terraform/main/**"
-    paths-ignore:
-      - 'lambda-test/**'
+    # paths:
+    #   - "terraform/main/**"
+    # paths-ignore:
+    #   - 'lambda-test/**'
 jobs:
   terraform:
     runs-on: ubuntu-latest
@@ -47,8 +47,7 @@ jobs:
       - name: Terraform apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
-          terraform workspace select dev || terraform workspace new dev
-          terraform plan -var-file=dev.tfvars -out=plan.out
-          terraform apply "plan.out"
+          terraform workspace select dev
+          terraform destroy
         continue-on-error: false
         working-directory: ./terraform/main
