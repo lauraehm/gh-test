@@ -15,7 +15,7 @@ jobs:
             aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_2 }}
             aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_2 }}
             aws-region: us-east-1
-            
+
         - name: Setup for terraform  
           uses: hashicorp/setup-terraform@v1
 
@@ -38,6 +38,7 @@ jobs:
     
         - name: Run TFLint
           run: tflint -f compact
+          working-directory: ./terraform/main
         # - name: Terraform init
         #   run: terraform init
         #   working-directory: ./terraform/backend
