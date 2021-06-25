@@ -1,8 +1,8 @@
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
+  # pull_request: 
+  #   branches: [main]
 jobs:
   terraform:
     runs-on: ubuntu-latest
@@ -21,19 +21,26 @@ jobs:
           id: fmt
           run: terraform fmt
           continue-on-error: false
-          working-directory: ./terraform/backend
-        - name: Terraform init
-          run: terraform init
-          working-directory: ./terraform/backend
-        - name: Terraform validation
-          run: terraform validate
-          working-directory: ./terraform/backend
-        - name: Terraform plan
-          run: terraform plan -out terraform-backend.out
-          continue-on-error: false
-          working-directory: ./terraform/backend
-        - name: Terraform apply
-          if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-          run: terraform destroy -auto-approve -input=false
-          continue-on-error: false
-          working-directory: ./terraform/backend
+          working-directory: ./terraform/main
+        - name: tflint
+          uses: reviewdog/action-tflint@master
+          with:
+            github_token: ${{ secrets.GH_TOKEN }}
+          working-directory: ./terraform/main
+          fail_on_error: true
+  
+        # - name: Terraform init
+        #   run: terraform init
+        #   working-directory: ./terraform/backend
+        # - name: Terraform validation
+        #   run: terraform validate
+        #   working-directory: ./terraform/backend
+        # - name: Terraform plan
+        #   run: terraform plan -out terraform-backend.out
+        #   continue-on-error: false
+        #   working-directory: ./terraform/backend
+        # - name: Terraform apply
+        #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        #   run: terraform destroy -auto-approve -input=false
+        #   continue-on-error: false
+        #   working-directory: ./terraform/backend
