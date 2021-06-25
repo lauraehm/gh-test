@@ -28,7 +28,7 @@ jobs:
             github_token: ${{ secrets.GH_TOKEN }}
             working_directory: ./terraform/main
             reporter: github-pr-review # Optional. Change reporter
-            fail_on_error: "true" # Optional. Fail action if errors are found
+            fail_on_error: "true"
             filter_mode: "nofilter"
         # - name: Terraform init
         #   run: terraform init
