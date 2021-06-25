@@ -26,8 +26,8 @@ jobs:
           uses: reviewdog/action-tflint@master
           with:
             github_token: ${{ secrets.GH_TOKEN }}
-          working-directory: ./terraform/main
-          fail_on_error: true
+            working-directory: ./terraform/main
+            fail_on_error: "true"
   
         # - name: Terraform init
         #   run: terraform init

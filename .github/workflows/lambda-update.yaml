@@ -1,50 +1,50 @@
-on:
-    push:
-        branches: [main]
-        paths:
-         - 'lambda-test/**'
-jobs:
-    terraform:
-      runs-on: ubuntu-latest
-      steps:
-        - name: checkout code
-          uses: actions/checkout@v2
+# on:
+#     push:
+#         branches: [main]
+#         paths:
+#          - 'lambda-test/**'
+# jobs:
+#     terraform:
+#       runs-on: ubuntu-latest
+#       steps:
+#         - name: checkout code
+#           uses: actions/checkout@v2
   
-        - name: Configure AWS credential
-          uses: aws-actions/configure-aws-credentials@v1
-          with:
-            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_2 }}
-            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_2 }}
-            aws-region: us-east-1
+#         - name: Configure AWS credential
+#           uses: aws-actions/configure-aws-credentials@v1
+#           with:
+#             aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_2 }}
+#             aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_2 }}
+#             aws-region: us-east-1
   
-        - name: Setup for terraform
-          uses: hashicorp/setup-terraform@v1
-          with:
-            terraform_version: 0.14.3
+#         - name: Setup for terraform
+#           uses: hashicorp/setup-terraform@v1
+#           with:
+#             terraform_version: 0.14.3
   
-        - name: Terraform fmt
-          id: fmt
-          run: terraform fmt
-          continue-on-error: false
-          working-directory: ./terraform/
+#         - name: Terraform fmt
+#           id: fmt
+#           run: terraform fmt
+#           continue-on-error: false
+#           working-directory: ./terraform/
   
-        - name: Terraform init
-          run: terraform init
-          working-directory: ./terraform/main
+#         - name: Terraform init
+#           run: terraform init
+#           working-directory: ./terraform/main
   
-        - name: Terraform validation
-          run: terraform validate
-          working-directory: ./terraform/main
+#         - name: Terraform validation
+#           run: terraform validate
+#           working-directory: ./terraform/main
   
-        - name: Terraform apply
-          if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-          run: |
-            terraform workspace select dev || terraform workspace new dev
-            terraform plan -var-file=dev.tfvars -out=plan.out
-            terraform apply "plan.out"
-          continue-on-error: false
-          working-directory: ./terraform/main
+#         - name: Terraform apply
+#           if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+#           run: |
+#             terraform workspace select dev || terraform workspace new dev
+#             terraform plan -var-file=dev.tfvars -out=plan.out
+#             terraform apply "plan.out"
+#           continue-on-error: false
+#           working-directory: ./terraform/main
  
-        - name: Update Lambdas
-          if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-          run: bash ./lambda-test/update-lambdas/test.sh
+#         - name: Update Lambdas
+#           if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+#           run: bash ./lambda-test/update-lambdas/test.sh
