@@ -39,6 +39,5 @@ resource "local_file" "gh_lambda" {
 }
 
 module "lambda" {
-  source = "./lambda"
   lambda_name = var.lambda_name
 }
