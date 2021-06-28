@@ -25,21 +25,30 @@ jobs:
           continue-on-error: false
           working-directory: ./terraform/main
       
-        - uses: terraform-linters/setup-tflint@v1
-          name: Setup TFLint
+        # - uses: terraform-linters/setup-tflint@v1
+        #   name: Setup TFLint
+        #   with:
+        #     tflint_version: v0.29.0
+        #     github_token: ${{ secrets.GH_TOKEN }}
+    
+        # - name: Show version
+        #   run: tflint --version
+    
+        # - name: Init TFLint
+        #   run: tflint --init
+    
+        # - name: Run TFLint
+        #   run: tflint -f compact
+        #   working-directory: ./terraform/main
+
+        # Minimal example
+        - name: tflint
+          uses: reviewdog/action-tflint@master
           with:
-            tflint_version: v0.29.0
             github_token: ${{ secrets.GH_TOKEN }}
-    
-        - name: Show version
-          run: tflint --version
-    
-        - name: Init TFLint
-          run: tflint --init
-    
-        - name: Run TFLint
-          run: tflint -f compact
-          working-directory: ./terraform/main
+            working_directory:  ./terraform/main
+            reporter: github-pr-review 
+
         # - name: Terraform init
         #   run: terraform init
         #   working-directory: ./terraform/backend
